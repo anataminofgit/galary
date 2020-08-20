@@ -56,12 +56,10 @@ const ListAlbums = () => {
     const arr = albumList.map(album => {
         const isSelected = (album.id === selectedAlbum);
         return (
-            <li key={album.id}  >
-                <button  type="button" onClick={() => handleClick(album.id)}>
+            <li key={album.id} onClick={() => handleClick(album.id)} >
                     <Album id={album.id} selected={isSelected} name={album.title}
                         imgList={isSelected ? selectedAlbumImgs : null}
                     />
-                </button>
             </li>
         )
     });
