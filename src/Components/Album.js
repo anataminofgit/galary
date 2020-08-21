@@ -31,21 +31,18 @@ const Album = (props) => {
 
     if (curretImgList && curretImgList.length > 0) {
         const listLen = curretImgList.length;
-        //     console.log("curretImgList", curretImgList)
         for (let i = 0; i < MAX_ROWS; i++) {
             const start = i * NUM_COL;
             if (listLen > start && (listLen < start + NUM_COL)) {
                 row[i] = curretImgList.slice(start, start + 1 + (listLen % NUM_COL)).map(item => {
 
-                    console.log("item", item.id, item)
                     const { url, thumbnailUrl, title } = item;
                     return (
                         <div className="col" key={`${id}-${item.id}`} >
-                            <Photo informClicked={() => { handleClick(id) }} id={item.id} title={title} url={url} thumbnailUrl={thumbnailUrl} />
+                            <Photo informClicked={() => { handleClick(item.id) }} id={item.id} title={title} url={url} thumbnailUrl={thumbnailUrl} />
                         </div>
                     )
                 })
-                console.log("row ", i, " ", row[i]);
                 for (let j = listLen % NUM_COL; j < NUM_COL; j++) {
                     row[i].push(<div className="col" key={`empty-col${j}`} />)
                 }

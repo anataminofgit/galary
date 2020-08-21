@@ -6,7 +6,6 @@ import "./modal.css"
 
 const Modal = (props) => {
     const { show, closeFunc ,url} = props
-    console.log("show", show)
     return (
         show ?
             <div id="Modal" className="modal">
