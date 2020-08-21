@@ -23,7 +23,7 @@ const ListAlbums = () => {
             axios.get(`http://jsonplaceholder.typicode.com/photos/?albumId=${id}`)
                 .then(function (response) {
                     const dataLength = response.data.length
-                    const length = dataLength < 12 ? dataLength : 10
+                    const length = dataLength < 12 ? dataLength : 12
                     const arr = response.data.slice(dataLength - length, dataLength);
                     setSelectedAlbumImgs(arr);
                 }).catch(function (error) {
