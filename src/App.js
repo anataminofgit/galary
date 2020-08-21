@@ -4,7 +4,7 @@ import './App.css';
 //import ImageUpload from './Components/ImageUpload';
 //import ImagesList from './Components/ImagesList';
 import { Provider } from "react-redux";
-import galaryStore from "./reducer/reducers";
+import galaryStore from "./Reducer/reducers";
 import ListAlbums from './Components/ListAlbums';
 
 
