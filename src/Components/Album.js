@@ -55,7 +55,7 @@ const Album = (props) => {
         <div className={selected ? "album selected" : "album"}>
             <div>name: {name}</div>
             <div>id : {id}</div>
-            <div>numer of open images {curretImgList ? curretImgList.length : 0}</div>
+            <div>number of open images {curretImgList ? curretImgList.length : 0}</div>
             {allRows}
         </div>
     );

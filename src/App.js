@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="app">
       <Provider store={galaryStore}>
-        <h1>My-App</h1>
+        <h1>Galary-App</h1>
         <ListAlbums/>
         {/* <ImagesList /> */}
       </Provider>
