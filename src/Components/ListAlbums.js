@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
-import { setAlbumList } from "../reducer/reducers"
+import { setAlbumList } from "../Actions/album"
 import Album from './Album';
 import "./ListAlbums.css"
 
@@ -9,10 +9,12 @@ const ListAlbums = () => {
     const dispatch = useDispatch();
     const [selectedAlbum, serSelectedAlbum] = React.useState(null);
     const [selectedAlbumImgs, setSelectedAlbumImgs] = React.useState(null)
-    const albumList = useSelector(
-        state => state.albumsList.albumsList
-    );
 
+    let albumList = useSelector(state => state.albumReducer.albumsList);
+    if (!albumList)
+        albumList = [];
+
+    console.log("albumList", albumList)
     const handleClick = (id) => {
         console.log("handleClick", id);
         if (id === selectedAlbum) {
@@ -55,7 +57,7 @@ const ListAlbums = () => {
         const isSelected = (album.id === selectedAlbum);
         return (
             <li key={album.id}  >
-                <button className="collaps" type="button" onClick={() => handleClick(album.id)}>{isSelected? "-":"+"}</button>
+                <button className="collaps" type="button" onClick={() => handleClick(album.id)}>{isSelected ? "-" : "+"}</button>
                 <Album id={album.id} selected={isSelected} name={album.title}
                     imgList={isSelected ? selectedAlbumImgs : null}
                 />
