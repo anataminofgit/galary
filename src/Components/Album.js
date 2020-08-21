@@ -25,17 +25,13 @@ const Album = (props) => {
     }, [imgList]);
 
 
-
-
     let row = [null, null, null];
-
     if (curretImgList && curretImgList.length > 0) {
         const listLen = curretImgList.length;
         for (let i = 0; i < MAX_ROWS; i++) {
             const start = i * NUM_COL;
             if (listLen > start && (listLen < start + NUM_COL)) {
                 row[i] = curretImgList.slice(start, start + 1 + (listLen % NUM_COL)).map(item => {
-
                     const { url, thumbnailUrl, title } = item;
                     return (
                         <div className="col" key={`${id}-${item.id}`} >
@@ -43,6 +39,7 @@ const Album = (props) => {
                         </div>
                     )
                 })
+                //  empty collumn for display order column
                 for (let j = listLen % NUM_COL; j < NUM_COL; j++) {
                     row[i].push(<div className="col" key={`empty-col${j}`} />)
                 }
@@ -53,20 +50,14 @@ const Album = (props) => {
         }
     }
 
+
+    const allRows = row.map(item => <div className="row">{item}</div>)
     return (
         <div className={selected ? "album selected" : "album"}>
             <div>name: {name}</div>
             <div>id : {id}</div>
             <div>numer of open images {curretImgList ? curretImgList.length : 0}</div>
-            <div className="row">
-                {row[0]}
-            </div>
-            <div className="row">
-                {row[1]}
-            </div>
-            <div className="row">
-                {row[2]}
-            </div>
+            {allRows}
         </div>
     );
 }
