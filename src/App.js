@@ -13,8 +13,7 @@ function App() {
     <div className="app">
       <Provider store={galaryStore}>
         <h1>Galary-App</h1>
-        <ListAlbums/>
-        {/* <ImagesList /> */}
+        <ListAlbums />
       </Provider>
 
     </div>

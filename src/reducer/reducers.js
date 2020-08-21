@@ -1,5 +1,5 @@
-import albumReducer from "./AlbumReducer";
-import imageReducer from "./AlbumReducer";
+import albumReducer from "./albumReducer";
+import imageReducer from "./albumReducer";
 
 const redux = require("redux");
 const reduxLogger = require("redux-logger");
