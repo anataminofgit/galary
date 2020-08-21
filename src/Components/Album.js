@@ -12,7 +12,6 @@ const Album = (props) => {
 
 
     const handleClick = (id) => {
-        console.log("clicked: ", id)
         const arr = curretImgList.filter(item => item.id !== id);
         setCurretImgList(arr);
     }

@@ -14,9 +14,7 @@ const ListAlbums = () => {
     if (!albumList)
         albumList = [];
 
-    console.log("albumList", albumList)
     const handleClick = (id) => {
-        console.log("handleClick", id);
         if (id === selectedAlbum) {
             serSelectedAlbum(null);
         }
