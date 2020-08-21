@@ -2,53 +2,75 @@ import React from 'react';
 import "../Components/Album.css"
 import Photo from './Photo';
 
+
+const MAX_ROWS = 3;
+const NUM_COL = 4;
+
 const Album = (props) => {
     const { id, name, selected, imgList } = props;
-
-    let row1 = null, row2 = null, row3 = null;
-
-    if (imgList) {
-        const listLen = imgList.length;
-        //let maxcol;
-        if (listLen > 4)
-            row1 = imgList.slice(0, 4).map((item) => <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
-        else //0-3
-            row1 = imgList.slice(0, listLen % 4).map(item => <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
-
-        if (listLen > 8)
-            row2 = imgList.slice(4, 8).map(item => <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
-        else if (listLen > 4 && listLen < 8)
-            row2 = imgList.slice(4, 5 + listLen % 4).map(item => <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
-
-        if (listLen >= 12)
-            row3 = imgList.slice(8, 12).map(item => {
-                return <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />
-            })
-
-        else if (listLen > 8 && listLen < 12)
-            row3 = imgList.slice(8, 9 + listLen % 4).map(item => <Photo key={`${id}-${item.id}`} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
+    const [curretImgList, setCurretImgList] = React.useState();
 
 
-
+    const handleClick = (id) => {
+        console.log("clicked: ", id)
+        const arr = curretImgList.filter(item => item.id !== id);
+        setCurretImgList(arr);
     }
 
 
+    React.useEffect(() => {
+        setCurretImgList(imgList);
+        return () => {
+        };
+    }, [imgList]);
+
+
+
+
+    let row = [null, null, null];
+
+    if (curretImgList && curretImgList.length > 0) {
+        const listLen = curretImgList.length;
+        //     console.log("curretImgList", curretImgList)
+        for (let i = 0; i < MAX_ROWS; i++) {
+            const start = i * NUM_COL;
+            if (listLen > start && (listLen < start + NUM_COL)) {
+                row[i] = curretImgList.slice(start, start + 1 + (listLen % NUM_COL)).map(item => {
+
+                    console.log("item", item.id, item)
+                    const { url, thumbnailUrl, title } = item;
+                    return (
+                        <div className="col" key={`${id}-${item.id}`} >
+                            <Photo informClicked={() => { handleClick(id) }} id={item.id} title={title} url={url} thumbnailUrl={thumbnailUrl} />
+                        </div>
+                    )
+                })
+                console.log("row ", i, " ", row[i]);
+                for (let j = listLen % NUM_COL; j < NUM_COL; j++) {
+                    row[i].push(<div className="col" key={`empty-col${j}`} />)
+                }
+            }
+            else if (listLen > start) {
+                row[i] = curretImgList.slice(start, start + NUM_COL).map(item => <Photo informClicked={handleClick} key={`${id}-${item.id}`} id={item.id} title={item.title} url={item.url} thumbnailUrl={item.thumbnailUrl} />)
+            }
+        }
+    }
+
     return (
-        <div className="album">
+        <div className={selected ? "album selected" : "album"}>
             <div>name: {name}</div>
             <div>id : {id}</div>
-            <div>is selected = {selected}</div>
+            <div>numer of open images {curretImgList ? curretImgList.length : 0}</div>
             <div className="row">
-                {row1}
+                {row[0]}
             </div>
             <div className="row">
-                {row2}
+                {row[1]}
             </div>
             <div className="row">
-                {row3}
+                {row[2]}
             </div>
         </div>
     );
 }
-
 export default Album;

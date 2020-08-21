@@ -1,3 +1,17 @@
-.album{
-    border : solid;
+.album {
+    border: solid;
+    min-width: 800px;
+}
+
+.album.selected{
+    background-color: burlywood;
+}
+.album .row {
+    width:100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.album .col{
+    width: 200px;
 }

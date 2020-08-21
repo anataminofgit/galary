@@ -1,3 +1,16 @@
 .photo{
-    
+    border:solid;
+    margin: 20px; 
+    position: relative;
+}
+
+.photo button{
+    float: right;   
+    text-align: right;
+}
+
+p.text-over {
+    padding: 10px;
+    position: absolute;
+    text-align: left;
 }

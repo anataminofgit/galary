@@ -17,17 +17,15 @@ const ListAlbums = () => {
         console.log("handleClick", id);
         if (id === selectedAlbum) {
             serSelectedAlbum(null);
-            // need to close the selected
         }
         else {
             serSelectedAlbum(id);
             axios.get(`http://jsonplaceholder.typicode.com/photos/?albumId=${id}`)
                 .then(function (response) {
                     const dataLength = response.data.length
-                    const length = dataLength < 12 ? dataLength : 12;
+                    const length = dataLength < 12 ? dataLength : 10
                     const arr = response.data.slice(dataLength - length, dataLength);
                     setSelectedAlbumImgs(arr);
-
                 }).catch(function (error) {
                     // handle error
                     console.log(error);
@@ -56,10 +54,11 @@ const ListAlbums = () => {
     const arr = albumList.map(album => {
         const isSelected = (album.id === selectedAlbum);
         return (
-            <li key={album.id} onClick={() => handleClick(album.id)} >
-                    <Album id={album.id} selected={isSelected} name={album.title}
-                        imgList={isSelected ? selectedAlbumImgs : null}
-                    />
+            <li key={album.id}  >
+                <button className="collaps" type="button" onClick={() => handleClick(album.id)}>{isSelected? "-":"+"}</button>
+                <Album id={album.id} selected={isSelected} name={album.title}
+                    imgList={isSelected ? selectedAlbumImgs : null}
+                />
             </li>
         )
     });
